@@ -1,12 +1,10 @@
 import datetime   	# used to form timestamp 
 import argparse   	#used to parse cmdline arguements to this script
 
-import publish_log
-import publish_hec
-import publish_mqtt
-from pwnybrau_library.src.publish_mqtt import publish_mqtt
+#from pwnybrau_library import publish_log, publish_hec, publish_mqtt
+from . import publish_log, publish_hec, publish_mqtt
 
-def publish(args:argparse.Namespace, value:str):
+def publish(value:str, args:argparse.Namespace):
     """ factory method that will send metric"""
 
     outputtype = str(args.output).upper()
