@@ -1,16 +1,25 @@
 
-import argparse   	#used to parse cmdline arguements to this script
-import datetime     # used to form timestamp 
-import json   	    
+import datetime     # used to form timestamp
+from configparser import SafeConfigParser #parse configuration files (like local/splunk_server.conf)
+import sys
 
-import argparse   	#used to parse cmdline arguements to this script
-import configparser #parse configuration files (like local/splunk_server.conf)
+def publish(configFile: str, message: str):
+	# open configfile
+	scp = SafeConfigParser()
+	found = scp.read(configFile)
+	
+	if (scp.has_section("LOG")):
+		if (scp.has_option("LOG", "logPrefix")):
+			fileprefix = scp["LOG"]["logPrefix"]
+		else:
+			sys.exit("Configuration File: "+ configFile + " is missing option logPrefix in stanza [LOG]")
+	else:
+		sys.exit("Configuration File: "+ configFile + " is missing stanza [LOG]")
 
-def publish_log(logfilename:str, value: str):
 	# craft filename
 	today=datetime.date.today()
-	logfile = logfilename + "." + str(today.year) + "." + str(today.month) + "." + str(today.day) + ".log"
+	logfile = fileprefix + "." + str(today.year) + "." + str(today.month) + "." + str(today.day) + ".log"
 	#write to file
 	f = open(logfile, "a")
-	f.write(value + "\n")
+	f.write(message + "\n")
 	f.close()

@@ -6,7 +6,7 @@ import socket     	# unix socket module
 import datetime     # used to form timestamp 
 import json   	    
 
-def publish_hec(value: str):
+def publish(value: str):
 	# craft filename
 	raise NotImplementedError
 
