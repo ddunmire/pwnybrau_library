@@ -1,7 +1,4 @@
 
-
-
-## Dependencies
 ## Dependencies
 Python Package Name | version | install | website
 ------------------- | ------- | ------- | -------
