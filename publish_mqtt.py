@@ -71,7 +71,7 @@ class publish_mqtt(Publisher):
 			sys.exit(errMsg)
 
 		# init mqtt client    https://github.com/eclipse/paho.mqtt.python#publishing
-		self.mqttClient = mqtt.Client(self.clientId)
+		self.mqttClient = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,self.clientId)
 		# Define Callbacks
 		# self.mqttClient.on_publish = publishCallback   #skipping dont need callback at the moment
 		# self.mqttClient.on_connect_fail = failedConnectionCallback
